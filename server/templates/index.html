@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baikal</title>
+    <style>
+   .btn {
+    width: 300px;
+    margin-bottom: 10px;
+    background: #527AB8; /* Серый цвет фона */
+    color: #FEF7EB; /* Белый цвет текста */
+    padding: 1rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+
+    border-radius: 3px; /* Скругляем уголки */
+
+   }
+  .nav {
+  display: flex;
+  flex-direction: column;
+  }
+    </style>
+
+</head>
+<body bgcolor="#212D41" bgproperties="fixed">
+<div id="test">{{ item }}</div>
+
+<div class="nav">
+    <a href="/museummasks" class="btn">Маски</a>
+    <a href="/museumgallery" class="btn">Интерактивная галерея
+        <a href="/guide" class="btn">Маршрут
+            <a href="/museumguide" class="btn">Гид</a>
+            <a href="/portal" class="btn">Портал (AR)</a>
+            <a href="/portal2" class="btn">Портал (VR)</a>
+            <a href="/souvenirstore" class="btn">Сувенирная лавка</a>
+</div>
+<script>{item}</script>
+<script type="text/javascript">
+let isAvailable = false;
+const timerId = setTimeout(() => {
+if (isAvailable){
+    clearTimeout(timerId);
+} else {
+    const el = document.getElementById('test').innerHTML.trim();
+    if (el.length > 0) {
+        isAvailable = true;
+        let json = JSON.parse(el);
+
+    }
+}}, 1000);
+</script>
+</body>
+</html>

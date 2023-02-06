@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://stemkoski.github.io/A-Frame-Examples/js/aframe-spritesheet-animation.js"></script>
+
+        <meta charset="utf-8" />
+        <title>Model Example</title>
+        <link rel="stylesheet" href="./css/style.min.css" />
+    </head>
+
+    <body>
+        <a-scene id="scene">
+            <!-- Ask user for camera permissions, display some text if permission is denied -->
+            <a-entity zappar-permissions-ui id="permissions"></a-entity>
+            <!-- shows a full-page dialog that informs the user they're using an unsupported browser -->
+            <a-entity zappar-compatibility-ui id="compatibility"></a-entity>
+
+            <a-camera zappar-camera="user-facing: true;" />
+
+            <!-- Setup our face tracker -->
+            <a-entity zappar-face id="my-face-tracker">
+                <!-- Include a head mask object that will make sure the user's head appears in the center of our helmet -->
+                <a-entity zappar-head-mask="face:#my-face-tracker;"></a-entity>
+                <!-- Include a 3D model inside our face tracker -->
+                <a-entity
+                    light="type: point; intensity: 2; distance: 1000; decay: 1"
+                    position="0 10 10"
+                ></a-entity>
+                <a-entity
+                    id="switcher"
+                    gltf-model="./ref/animation.glb"
+                    position="-2 -3 4"
+                    scale="0.3 0.3 0.3"
+                    rotation="0 -90 0"
+                    animation-mixer
+                ></a-entity>
+            </a-entity>
+            <a-entity camera></a-entity>
+        </a-scene>
+
+        <button class="make-screenshot">Make screenshot</button>
+        <div class="preview">
+            <div class="preview__screenshot">
+                <img src="" alt="screenshot" />
+            </div>
+        </div>
+        <div class="change">
+            <div id="bear" class="change__mask"></div>
+            <div id="mask" class="change__mask"></div>
+            <div id="smth" class="change__mask"></div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        <script src="script.js"></script>
+    </body>
+</html>

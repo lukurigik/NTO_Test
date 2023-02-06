@@ -23,12 +23,12 @@
 
 </head>
 <body bgcolor="#212D41" bgproperties="fixed">
-<div id="test">{{ item }}</div>
+<div id="test" hidden="hidden">{{ item }}</div>
 
 <div class="nav">
     <a href="/museummasks" class="btn">Маски</a>
-    <a href="/museumgallery" class="btn">Интерактивная галерея
-        <a href="/guide" class="btn">Маршрут
+    <a href="/museumgallery" class="btn">Интерактивная галерея</a>
+        <a href="/guide" class="btn">Маршрут</a>
             <a href="/museumguide" class="btn">Гид</a>
             <a href="/portal" class="btn">Портал (AR)</a>
             <a href="/portal2" class="btn">Портал (VR)</a>
@@ -45,7 +45,8 @@ if (isAvailable){
     if (el.length > 0) {
         isAvailable = true;
         let json = JSON.parse(el);
-
+        console.log(json)
+        // Недостающий код сюда
     }
 }}, 1000);
 </script>

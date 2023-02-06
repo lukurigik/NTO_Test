@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 values = []
 
+
 def connect():
     global values
     try:
@@ -42,12 +43,13 @@ for i in values:
         ex[str(i[2])] += 1
 print(ex)
 
-
 if __name__ == '__main__':
-
     @app.route("/")
     def index():
         return render_template("index.html", item=ex.__str__().replace("'", '"'))
 
+    @app.route("/museumgallery")
+    def gallery():
+        return render_template("museumgallery.html")
 
     app.run(port=8080, host='127.0.0.1')

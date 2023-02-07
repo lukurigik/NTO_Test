@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .btn {
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            .btn {
     width: 300px;
     margin-bottom: 10px;
     background: #212D41; /* Серый цвет фона */
@@ -15,122 +15,124 @@
     border-radius: 3px; /* Скругляем уголки */
 
    }
-    </style>
-</head>
-<body>
-<a id="leave" href="/" class="btn">Выйти</a>
-<div id="test" hidden="hidden">{{ item }}</div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script type="text/javascript">
-let isAvailable = false;
-const timerId = setTimeout(() => {
-if (isAvailable){
-    clearTimeout(timerId);
-} else {
-    const el = document.getElementById('test').innerHTML.trim();
-    if (el.length > 0) {
-        isAvailable = true;
-        let json = JSON.parse(el);
-        console.log(json)
+        </style>
+    </head>
+    <body>
+        <div id="test" hidden="hidden">{{ item }}</div>
+        <script src='https://d3js.org/d3.v7.min.js'></script>
 
-        function statistic() {
-                let scale = 15
-                    width = 540
-                    height = (1.5*8*scale + 100)*2
-                    margin = scale*4;
+        <script type="text/javascript">
+        let isAvailable = false;
+        const timerId = setTimeout(() => {
+        if (isAvailable){
+            clearTimeout(timerId);
+        } else {
+            const el = document.getElementById('test').innerHTML.trim();
+            if (el.length > 0) {
+                isAvailable = true;
+                let json = JSON.parse(el);
+                console.log(json)
 
-                let scaleX = d3.scaleLinear() //расчет шкалы x
-                            .domain([1, 140])
-                            .range([0, width - 4*margin]);
+                function statistic() {
+                        let scale = 15
+                            width = 70*scale
+                            height = 40*scale
+                            margin = scale*4;
 
-                let scaleY = d3.scaleLinear() //расчет шкалы y
-                            .domain([8, 0])
-                            .range([0, 1.5*8*scale]);
+                        let scaleX = d3.scaleLinear() //расчет шкалы x
+                                    .domain([1, 2000])
+                                    .range([0, width - 4*margin]);
 
-                let stats = d3.select('body')
-                    .attr('width', width)
-                    .attr('height', height)
-                    .append('svg')
-                        .attr('id', 'statistics')
-                        .attr('width', width-2*margin)
-                        .attr('height', height-2*margin)
-                    .style('font', '0.5em sans-serif');
+                        let scaleY = d3.scaleLinear() //расчет шкалы y
+                                    .domain([8, 0])
+                                    .range([0, 12*scale]);
 
-                stats.selectAll('g')
-                    .data(Object.entries(json)) //среднее врем посещения
-                    .join('g')
-                        .attr('transform', (d, i) => `translate(${margin}, ${(i*1.5*scale)*2+margin})`)
-                    .append('rect')
-                        .attr('height', scale*2)
-                        .attr('width', d => d[1])
-                        .attr('stroke', 'none')
-                        .attr('fill',  '#fcf');
+                        let stats = d3.select('body')
+                            .attr('width', width)
+                            .attr('height', height)
+                            .append('svg')
+                                .attr('id', 'statistics')
+                                .attr('width', width-2*margin)
+                                .attr('height', height-2*margin)
+                            .style('font', '0.5em sans-serif');
 
-                stats.append('g')
-                    .attr('id', 'y-axis') // ось y
-                    .attr('transform', `translate(${margin}, ${margin})`)
-                    .append('line')
-                        .attr('x1', 0)
-                        .attr('y1', 0)
-                        .attr('x2', 0)
-                        .attr('y2', (12*scale-8)*2)
-                        .attr('stroke',  '#000')
-                        .attr('stroke-opacity', 0.7);
+                        stats.selectAll('g')
+                            .data(Object.entries(json)) //среднее врем посещения
+                            .join('g')
+                                .attr('transform', (d, i) => `translate(${margin}, ${(i*1.5*scale)*2+margin})`)
+                            .append('rect')
+                                .attr('height', scale*2)
+                                .attr('width', d => scaleX(d[1]))
+                                .attr('stroke', 'none')
+                                .attr('fill',  '#fcf');
 
-                stats.append('g')
-                    .attr('id', 'y-name') //шкала y
-                    .attr('transform', `translate(${margin-50}, ${margin})`)
-                    .selectAll('text')
-                    .data(['Экспонат8', 'Экспонат7', 'Экспонат6', 'Экспонат5', 'Экспонат4', 'Экспонат3', 'Экспонат2', 'Экспонат1'])
-                    .join('text')
-                        .attr('transform', (d, i) => `translate(0, ${scaleY(i+1)*2})`)
-                        .text(d => d);
+                        stats.append('g')
+                            .attr('id', 'y-axis') // ось y
+                            .attr('transform', `translate(${margin}, ${margin})`)
+                            .append('line')
+                                .attr('x1', 0)
+                                .attr('y1', 0)
+                                .attr('x2', 0)
+                                .attr('y2', (12*scale-8)*2)
+                                .attr('stroke',  '#000')
+                                .attr('stroke-opacity', 0.7);
 
-                stats.append('g')
-                    .attr('id', 'x-axis') // ось x
-                    .attr('transform', `translate(${margin}, ${(12*scale-8)*2+margin})`)
-                    .append('line')
-                        .attr('x1', 0)
-                        .attr('y1', 0)
-                        .attr('x2', 30*scale)
-                        .attr('y2', 0)
-                        .attr('stroke',  '#000')
-                        .attr('stroke-opacity', 0.7);
-                let arr = [];
-                for (let i=1; i<142; i+=20) {arr.push(i);}
+                        stats.append('g')
+                            .attr('id', 'y-name') //шкала y
+                            .attr('transform', `translate(${margin-50}, ${margin})`)
+                            .selectAll('text')
+                            .data(['Экспонат1', 'Экспонат2', 'Экспонат3', 'Экспонат4', 'Экспонат5', 'Экспонат6', 'Экспонат7', 'Экспонат8'])
+                            .join('text')
+                                .attr('transform', (d, i) => `translate(0, ${scaleY(i+1)*2})`)
+                                .text(d => d);
 
-                stats.append('g')
-                    .attr('id', 'x-name') //шкала x
-                    .attr('transform', `translate(${margin}, ${(12*scale-4)*2+margin})`)
-                    .selectAll('text')
-                    .data(arr)
-                    .join('text')
-                        .attr('transform', d => `translate(${scaleX(d+1)}, 0)`)
-                        .text(d => d);
+                        stats.append('g')
+                            .attr('id', 'x-axis') // ось x
+                            .attr('transform', `translate(${margin}, ${(12*scale-8)*2+margin})`)
+                            .append('line')
+                                .attr('x1', 0)
+                                .attr('y1', 0)
+                                .attr('x2', 40*scale)
+                                .attr('y2', 0)
+                                .attr('stroke',  '#000')
+                                .attr('stroke-opacity', 0.7);
 
-                stats.append('g') // вертикальные прозрачные линии
-                    .attr('id', 'marking')
-                    .selectAll('line')
-                    .data(arr)
-                    .join('line')
-                        .attr('x1', d => scaleX(d+1)+margin)
-                        .attr('y1', margin)
-                        .attr('x2', d => scaleX(d+1)+margin)
-                        .attr('y2', 23*scale+margin)
-                        .attr('stroke',  '#000')
-                        .attr('stroke-opacity', '0.2');
+                        let arr = [];
+                        for (let i=1; i<2002; i+=100) {arr.push(i);}
 
-                let name = d3.select('svg') //заголовок
-                    .append('text')
-                        .style('font', '15px sans-serif')
-                        .attr('transform', 'translate(110, 20)')
-                    .text('Время, проведенное у экспонатов');
+                        stats.append('g')
+                            .attr('id', 'x-name') //шкала x
+                            .attr('transform', `translate(${margin}, ${(12*scale-4)*2+margin})`)
+                            .selectAll('text')
+                            .data(arr)
+                            .join('text')
+                                .attr('transform', d => `translate(${scaleX(d*0.7)}, 0)`)
+                                .text(d => d);
 
-                stats.enter();
-             }
-            statistic();
-    }
-}}, 1000);
-</script>
-</body>
+                        stats.append('g') // вертикальные прозрачные линии
+                            .attr('id', 'marking')
+                            .selectAll('line')
+                            .data(arr)
+                            .join('line')
+                                .attr('x1', d => scaleX(d*0.7)+scaleX(1)+margin)
+                                .attr('y1', margin)
+                                .attr('x2', d => scaleX(d*0.7)+scaleX(1)+margin)
+                                .attr('y2', 23*scale+margin)
+                                .attr('stroke',  '#000')
+                                .attr('stroke-opacity', '0.2');
+
+                        let name = d3.select('svg') //заголовок
+                            .append('text')
+                                .style('font', '15px sans-serif')
+                                .attr('transform', 'translate(110, 20)')
+                            .text('Время, проведенное у экспонатов');
+
+                        stats.enter();
+                        }
+                        statistic();
+            }
+        }}, 1000);
+        </script>
+    <a href="/" class="btn">Выйти</a>
+    </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/style.min.css" />
+        <title></title>
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://stemkoski.github.io/A-Frame-Examples/js/aframe-spritesheet-animation.js"></script>
+    </head>
+    <body>
+        <div class="none" id="arjs-video"></div>
+        <div class="show none"></div>
+        <div class="scene none "></div>
+        <div class="map">
+            <img class="map__ways" src="./ref/map.png" alt="" />
+            <img class="map__arrow1 map__arrow none" src="./ref/arrow.png" />
+            <img class="map__arrow2 map__arrow none" src="./ref/arrow.png" />
+            <img class="map__arrow3 map__arrow none" src="./ref/arrow.png" />
+        </div>
+        <div class="start">Начать</div>
+        <div class="remain none">Перейти</div>
+        <div class="next none">Следующий экспонат</div>
+        <div class="next-room none">Следующая комната</div>
+        <div class="end none">Вы всё прошли</div>
+        <div id="test" hidden="hidden">{{item}}</div>
+        <script src="script.js"></script>
+    </body>
+</html>

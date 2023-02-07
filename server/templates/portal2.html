@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <style>
+        #leave {
+        position: absolute;
+        bottom: 10px;
+        width: 100px;
+        right: calc(100% - 145px);
+
+        background-color: #11213B;
+        color: #31F13C;
+        text-align: center;
+        font-family: sans-serif;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-liquid-portal-shader"></script>
+</head>
+<body>
+<a-scene>
+    <a-assets>
+        <audio id="click-sound" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+        <!-- Images. -->
+        <img id="city" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+        <img id="city-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+        <img id="sechelt-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+    </a-assets>
+
+    <!-- 360-degree image. -->
+    <a-sky id="image-360" radius="10" src="#cubes"></a-sky>
+
+    <!-- Link template we will build. -->
+    <a-entity class="link"></a-entity>
+
+    <!-- Camera + Cursor. -->
+    <a-camera>
+        <a-cursor
+                id="cursor"
+                animation__click="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; easing: easeInCubic; dur: 150; startEvents: click"
+                animation__clickreset="property: scale; to: 0.1 0.1 0.1; dur: 1; startEvents: animationcomplete__click"
+                animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; easing: easeInCubic; dur: 150; startEvents: fusing"></a-cursor>
+    </a-camera>
+</a-scene>
+<a id="leave" href="/portal" class="btn">Выйти</a>
+</body>
+</html>

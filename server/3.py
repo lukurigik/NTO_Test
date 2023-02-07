@@ -48,8 +48,30 @@ if __name__ == '__main__':
     def index():
         return render_template("index.html", item=ex.__str__().replace("'", '"'))
 
+
     @app.route("/museumgallery")
     def gallery():
         return render_template("museumgallery.html")
+
+
+    @app.route("/portal1")
+    def portal1():
+        return render_template("portal1.html")
+
+
+    @app.route("/portal2")
+    def portal2():
+        return render_template("portal2.html")
+
+
+    @app.route("/portal")
+    def portal():
+        return render_template("portal.html")
+
+
+    @app.route("/stats")
+    def stats():
+        return render_template("stats.html", item=ex.__str__().replace("'", '"'))
+
 
     app.run(port=8080, host='127.0.0.1')

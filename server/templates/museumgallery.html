@@ -85,7 +85,9 @@
             preset="custom"
             url="https://cdn.glitch.global/3a05f7cc-6386-427d-9c60-ae6c4d233661/pattern-gallery-marker.patt?v=1675662238380"
     >
-        <a-entity id="currentMask" rotation="0 0 0" gltf-model="#mask4"></a-entity>
+        <a-video visible="false" id="md1" stc="https://cdn.glitch.me/87659aa6-70e3-4dac-bfb6-3a2d54f119f5/pexels-nadezhda-moryak-7039229.mp4?v=1675670267171"></a-video>
+        <a-image visible="false" id="md2" src="https://cdn.glitch.global/87659aa6-70e3-4dac-bfb6-3a2d54f119f5/-9ajCOekc8Q.jpg?v=1675670218450"></a-image>
+        <a-entity visible="false" id="md3" geometry="primitive: box" material="color: red"></a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -93,5 +95,37 @@
 <div id="left_button">Предыдущий</div>
 <a id="leave" href="/" class="btn">Выйти</a>
 <div id="right_button">Следующий</div>
+<script>
+      let k = 1;
+      function MaskChange() {
+        const instant_mask = document.getElementById(`md${k}`);
+        instant_mask.setAttribute("visible", true);
+      }
+      function MaskHide() {
+        const instant_mask = document.getElementById(`md${k}`);
+        instant_mask.setAttribute("visible", false);
+      }
+
+      const PredUI = document.getElementById("left_button");
+      PredUI.addEventListener("click", function () {
+        MaskHide();
+        if (k == 1) {
+          k = 3;
+        } else {
+          k--;
+        }
+        MaskChange();
+      });
+      const NextUI = document.getElementById("right_button");
+      NextUI.addEventListener("click", function () {
+        MaskHide();
+        if (k == 4) {
+          k = 1;
+        } else {
+          k++;
+        }
+        MaskChange();
+      });
+    </script>
 </body>
 </html>

@@ -46,7 +46,7 @@ print(ex)
 if __name__ == '__main__':
     @app.route("/")
     def index():
-        return render_template("index.html", item=ex.__str__().replace("'", '"'))
+        return render_template("index.html")
 
 
     @app.route("/museumgallery")

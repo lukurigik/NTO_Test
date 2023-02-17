@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.map {
+    width: 600px;
+    z-index: 50;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &__ways {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    &__arrow {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+    }
+
+    &__arrow1 {
+        top: 270px;
+        left: 260px;
+        transform: rotate(-45deg);
+    }
+
+    &__arrow2 {
+        top: 270px;
+        left: 175px;
+        transform: rotate(-135deg);
+    }
+
+    &__arrow3 {
+        transform: rotate(90deg);
+        top: 375px;
+        left: 215px;
+    }
+}
+
+.none {
+    display: none !important;
+}
+
+.start {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    background-color: rgb(108, 113, 189);
+}
+
+.remain {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    background-color: rgb(143, 94, 199);
+}
+
+.next {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    background-color: rgb(211, 135, 135);
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.show {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    background-color: rgb(211, 135, 135);
+    transform: translateX(-50%);
+    left: 50%;
+    top: 20px;
+}
+
+.end {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    transform: translate(-50%, -50%);
+    background-color: rgb(53, 25, 129);
+}
+
+.next-room {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    background-color: rgb(135, 211, 182);
+    z-index: 10;
+}
+
+.white {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: aliceblue;
+    z-index: 5;
+}
+
+.arrow-back {
+    color: black;
+    position: fixed;
+    bottom: 5px;
+    width: 40px;
+    height: 40px;
+    left: calc(50% - 150px);
+    transform: translateX(-50%);
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.arrow-next {
+    color: black;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 5px;
+    left: calc(50% + 150px);
+    transform: translateX(-50%);
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
